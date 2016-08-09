@@ -1,9 +1,9 @@
 import requests, re, sys
-from bs4    import BeautifulSoup
+from bs4 import BeautifulSoup
 from functools import partial
 from multiprocessing import Pool
- 
- 
+
+
 def get_urls(search_string, start):
     temp        = []
     url         = 'http://www.google.com/search'
@@ -18,7 +18,7 @@ def get_urls(search_string, start):
         except:
             continue
     return temp
- 
+
 def scanner(search, pages, processes):
     result      = []
     search      = search
@@ -26,7 +26,7 @@ def scanner(search, pages, processes):
     processes   = int( processes )
     make_request = partial( get_urls, search )
     pagelist     = [ str(x*10) for x in range( 0, int(pages) ) ]
-    
+
     pool = Pool(processes=processes)
     tmp = pool.map(make_request, pagelist)
     for x in tmp:
